@@ -8,6 +8,7 @@ use Database\Factories\LocationFactory;
 use Domains\Shared\Models\Concerns\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Location extends Model  {
     use HasUuid;
@@ -24,6 +25,13 @@ class Location extends Model  {
         'postcode',
         'country'
     ];
+
+    public function addresses(): HasMany {
+      return $this->hasMany(
+          related: Address::class,
+          foreignKey: 'location_id'
+      );
+    }
 
     protected static function newFactory(): LocationFactory {
       return new LocationFactory();
