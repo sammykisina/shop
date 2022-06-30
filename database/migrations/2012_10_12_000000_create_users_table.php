@@ -15,7 +15,10 @@ return new class extends Migration {
             $table->string(column:'last_name');
             $table->string(column:'email')->unique();
             $table->string(column:'password');
-            $table->rememberToken();           
+            $table->rememberToken();          
+            
+            $table->foreignId(column:'billing_id')->constrained(table: 'addresses')->nullable();
+            $table->foreignId(column:'shipping_id')->constrained(table:'addresses')->nullable();
 
             $table->timestamps();
         });
