@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domains\Customer\Models;
 
+use Database\Factories\AddressFactory;
 use Domains\Customer\Modals\User;
 use Domains\Customer\Modals\location;
 use Domains\Shared\Models\Concerns\HasUuid;
@@ -38,6 +39,10 @@ class Address extends Model {
             related: Location::class,
             foreignKey: 'location_id'
        );
+    }
+
+    public static function newFactory(): AddressFactory {
+       return new AddressFactory();
     }
 
 }
