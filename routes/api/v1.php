@@ -18,8 +18,13 @@ Route::prefix('products')->as('products:')->group(function () {
      */
     Route::get(
         '/',
+        App\Http\Controllers\Api\V1\Products\IndexController::class
+    )->name('index'); // route('api:v1:products:index')
+
+    Route::get(
+        '{uuid}',
         App\Http\Controllers\Api\V1\Products\ShowController::class
-    )->name('show'); // route('api:v1:products:show')
+    )->name('show'); // route('api:v1:products:index')
 
     
 });
