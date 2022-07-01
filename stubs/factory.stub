@@ -7,8 +7,8 @@ namespace {{ factoryNamespace }};
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class {{ factory }}Factory extends Factory {
-    protected $model = {{ factory }}::class;
     
+    protected $model = {{ factory }}::class;
     public function definition(): array {
         return [
             //

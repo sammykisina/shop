@@ -4,29 +4,32 @@ declare(strict_types=1);
 
 namespace Domains\Catalog\Models;
 
-use Database\Factories\CategoryFactory;
+use Database\Factories\ProductFactory;
 use Domains\Shared\Models\Concerns\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model { // T-Shirts, Hats etc
+class Product extends Model {
   use HasFactory;
   use HasUuid;
-
-  public $timestamps = false;
 
   protected $fillable = [
     'uuid',
     'name',
     'description',
-    'active'
+    'cost',
+    'retail',
+    'active',
+    'vat',
+    'category_id',
+    'range_id'
   ];
 
-  // protected $casts = [
-  //   'active' => 'boolean'
-  // ];
+  protected $casts = [
+    'active' => 'boolean'
+  ];
 
-  protected static function newFactory(): CategoryFactory {
-    return new CategoryFactory();
+  protected static function newFactory(): ProductFactory {
+    return new ProductFactory();
   }
 }
