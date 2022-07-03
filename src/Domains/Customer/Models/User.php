@@ -64,6 +64,13 @@ class User extends Authenticatable {
         );
     }
 
+    public function orders(): HasMany {
+        return $this->hasMany(
+            related: Order::class,
+            foreignKey:'user_id'
+        );
+    }
+
     protected static function newFactory(): UserFactory {
         return new UserFactory();
     }

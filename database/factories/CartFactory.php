@@ -22,7 +22,7 @@ class CartFactory extends Factory {
             ),
             'coupon' => $useCoupon ? fake()->imei() : null,
             'total' => fake()->numberBetween(int1: 1000,int2: 100000),
-            'reduction' => $useCoupon ? fake()->numberBetween(int1: 250, int2: 2500) : null ,
+            'reduction' => $useCoupon ? fake()->numberBetween(int1: 250, int2: 2500) : 0 ,
             'user_id' => User::factory()->create()
         ];
     }

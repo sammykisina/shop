@@ -15,12 +15,12 @@ return new class extends Migration {
 
             $table->string(column:'status');// pending (When Adding Or Removing Items From The Cart)/checked-out (When The Cart Goes Through The Payment Cycle And Waiting For Payment Status )/abandoned
             $table->string(column:'coupon')->nullable();
-            $table->unsignedBigInteger(column:'total')->nullable();
-            $table->unsignedBigInteger(column:'reduction')->nullable();
+            $table->unsignedBigInteger(column:'total')->default(0);
+            $table->unsignedBigInteger(column:'reduction')->default(0);
 
             $table->foreignId(column: 'user_id')
                 ->index()
-                ->nullable()
+                ->nullable() // For Guest Users
                 ->constrained()
                 ->nullOnDelete()
             ;

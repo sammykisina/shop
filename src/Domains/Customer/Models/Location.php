@@ -32,7 +32,7 @@ class Location extends Model  {
           foreignKey: 'location_id'
       );
     }
-
+    
     protected static function newFactory(): LocationFactory {
       return new LocationFactory();
     }

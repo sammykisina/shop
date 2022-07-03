@@ -10,6 +10,7 @@ use Domains\Shared\Models\Concerns\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cart extends Model {
   use HasFactory;
@@ -34,6 +35,14 @@ class Cart extends Model {
       foreignKey:'user_id'
     );
   }
+
+  public function items(): HasMany {
+    return $this->hasMany(
+      related: Cart::class,
+      foreignKey: 'cart_id'
+    );
+  }
+
 
   protected static function newFactory(): CartFactory {
     return new CartFactory();
