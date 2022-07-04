@@ -38,7 +38,7 @@ class Cart extends Model {
 
   public function items(): HasMany {
     return $this->hasMany(
-      related: Cart::class,
+      related: CartItem::class,
       foreignKey: 'cart_id'
     );
   }

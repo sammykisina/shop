@@ -19,6 +19,7 @@ class CartItem extends Model {
     'uuid',
     'purchasable_id',
     'purchasable_type',
+    'quantity',
     'cart_id'
   ];
 
