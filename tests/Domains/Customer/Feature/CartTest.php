@@ -19,6 +19,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\patch;
 use function Pest\Laravel\post;
 use function Pest\Laravel\assertDeleted;
+use function Pest\Laravel\delete;
 
 it('can create a cart for an unauthenticated user') 
   -> post(
@@ -136,3 +137,21 @@ it('can remove item from cart when the quantity is zero', function () {
   expect(EloquentStoredEvent::query()->first()->event_class)->toEqual(expected: ProductWasRemovedFromCart::class);
 });
 
+it('can remove an item from the cart', function() {
+   expect(value: EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
+  $cartItem = CartItem::factory()->create([
+    'quantity' => 3
+  ]);
+
+  delete(
+    route(name:'api:v1:carts:products:delete',parameters: [
+      'cart' => $cartItem->cart->uuid,
+      'item' => $cartItem->uuid
+    ])
+  )->assertStatus(
+    status: Http::ACCEPTED
+  );
+
+  expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 1);
+  expect(EloquentStoredEvent::query()->first()->event_class)->toEqual(expected: ProductWasRemovedFromCart::class);
+});

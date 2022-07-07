@@ -56,5 +56,5 @@ Route::prefix('carts')->as('carts:')->group( function() {
     // /**
     //  * Delete Product From Cart
     //  */
-    // Route::post('{cart}/products/{cartItem}',App\Http\Controllers\Api\V1\Carts\DeleteController::class)->name('products:delete');
+    Route::delete('{cart:uuid}/products/{item:uuid}',App\Http\Controllers\Api\V1\Carts\Products\DeleteController::class)->name('products:delete');
 });

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Domains\Customer\Events;
 
-use Domains\Customer\ValueObjects\CartItemValueObject;
 use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
 
 abstract class ProductCartEvent  extends ShouldBeStored{

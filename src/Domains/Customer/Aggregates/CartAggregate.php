@@ -14,12 +14,13 @@ use Spatie\EventSourcing\AggregateRoots\AggregateRoot;
 
 
 class CartAggregate extends AggregateRoot {
+  
   /**
    * [Description for addProductToCart]
    *
-   * @param CartItemValueObject $cartItem
+   * @param int $purchasableID
    * @param int $cartID
-   * @param string $type
+   * @param string $purchasableType
    * 
    * @return self
    * 
@@ -37,12 +38,13 @@ class CartAggregate extends AggregateRoot {
   }
 
     
+  
   /**
    * [Description for removeProductFromCart]
    *
-   * @param CartItemValueObject $cartItem
+   * @param int $purchasableID
+   * @param string $purchasableType
    * @param int $cartID
-   * @param string $type
    * 
    * @return self
    * 
