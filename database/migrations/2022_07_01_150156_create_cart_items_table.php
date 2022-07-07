@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->uuid(column: 'uuid')->unique();
 
             $table->morphs(name:'purchasable'); // Can Be A Variant Or A Bundle
-            $table->unsignedInteger(column: 'quantity');
+            $table->unsignedInteger(column: 'quantity')->default(1);
 
             $table->foreignId(column:'cart_id')
             ->index()

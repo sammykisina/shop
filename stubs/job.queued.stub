@@ -13,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
 
 class {{ class }} implements ShouldQueue {
     use Dispatchable; 
-    useInteractsWithQueue; 
+    use InteractsWithQueue; 
     use Queueable; 
     use SerializesModels;
 

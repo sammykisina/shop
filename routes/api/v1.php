@@ -28,3 +28,33 @@ Route::prefix('products')->as('products:')->group(function () {
 
     
 });
+
+/**
+ * Cart Routes
+ */
+Route::prefix('carts')->as('carts:')->group( function() {
+    /**
+     * Get The Current Users Cart
+     */
+    Route::get('/', App\Http\Controllers\Api\V1\Carts\IndexController::class)->name('index'); 
+
+    // /**
+    //  * Create A New Cart
+    //  */
+    Route::post('/',App\Http\Controllers\Api\V1\Carts\StoreController::class)->name('store');
+
+    // /**
+    //  * Add Product To Cart
+    //  */
+    Route::post('{cart:uuid}/products',App\Http\Controllers\Api\V1\Carts\Products\StoreController::class)->name('products:store');
+
+    // /**
+    //  * Update Quantity
+    //  */
+    Route::patch('{cart:uuid}/products/{item:uuid}',App\Http\Controllers\Api\V1\Carts\Products\UpdateController::class)->name('products:update');
+
+    // /**
+    //  * Delete Product From Cart
+    //  */
+    // Route::post('{cart}/products/{cartItem}',App\Http\Controllers\Api\V1\Carts\DeleteController::class)->name('products:delete');
+});

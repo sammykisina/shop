@@ -9,41 +9,66 @@ use Domains\Customer\Events\ProductQuantityWasDecreased;
 use Domains\Customer\Events\ProductQuantityWasIncreased;
 use Domains\Customer\Events\ProductWasAddedToCart;
 use Domains\Customer\Events\ProductWasRemovedFromCart;
+use Domains\Customer\ValueObjects\CartItemValueObject;
 use Spatie\EventSourcing\AggregateRoots\AggregateRoot;
+
 
 class CartAggregate extends AggregateRoot {
   /**
-   * Add A Product (Variant Or Bundle) To Cart
+   * [Description for addProductToCart]
+   *
+   * @param CartItemValueObject $cartItem
+   * @param int $cartID
+   * @param string $type
+   * 
+   * @return self
+   * 
    */
-  public function addProductToCart(int $purchasableID,int $cartID):self {
+  public function addProductToCart(int $purchasableID,int $cartID,string $purchasableType):self {
     $this->recordThat(
       domainEvent: new ProductWasAddedToCart(
         purchasableID: $purchasableID,
         cartID: $cartID,
-        type: Variant::class
+        purchasableType: $purchasableType
       )
     );
     
     return $this;
   }
 
+    
   /**
-   * Remove A Product From Cart
+   * [Description for removeProductFromCart]
+   *
+   * @param CartItemValueObject $cartItem
+   * @param int $cartID
+   * @param string $type
+   * 
+   * @return self
+   * 
    */
-  public function removeProductFromCart(int $purchasableID, int $cartID,string $type): self {
+  public function removeProductFromCart(int $purchasableID,string $purchasableType, int $cartID ): self {
     $this->recordThat(
       domainEvent: new ProductWasRemovedFromCart(
         purchasableID: $purchasableID,
-        cartID: $cartID,
-        type: $type
+        purchasableType: $purchasableType,
+        cartID:$cartID,
       )
     );
 
     return $this;
   }
 
+  
   /**
-   * Increase Product Quantity
+   * [Description for increaseProductQuantityInCart]
+   *
+   * @param int $cartItemID
+   * @param int $cartID
+   * @param int $quantity
+   * 
+   * @return self
+   * 
    */
   public function increaseProductQuantityInCart(int $cartItemID, int $cartID, int $quantity): self {
     $this->recordThat(

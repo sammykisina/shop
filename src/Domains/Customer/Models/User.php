@@ -71,7 +71,7 @@ class User extends Authenticatable {
         );
     }
 
-    protected static function newFactory(): UserFactory {
-        return new UserFactory();
-    }
+  protected static function newFactory(): UserFactory {
+    return new UserFactory();
+  }
 }

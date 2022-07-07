@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Domains\Customer\Projectors;
 
+use Domains\Customer\Actions\AddProductToCart;
+use Domains\Customer\Actions\RemoveProductFromCart;
 use Domains\Customer\Aggregates\CartAggregate;
 use Domains\Customer\Events\ProductQuantityWasDecreased;
 use Domains\Customer\Events\ProductQuantityWasIncreased;
@@ -15,26 +17,48 @@ use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 use Illuminate\Support\Str;
 
 class CartProjector extends Projector {
+
+  /**
+   * [Description for onProductWasAddedToCart]
+   *
+   * @param ProductWasAddedToCart $event
+   * 
+   * @return void
+   * 
+   */
   public function onProductWasAddedToCart(ProductWasAddedToCart $event): void {
     $cart = Cart::query()->find(
       id: $event->cartID
     );
 
-    $cart->items()->create([
-      'purchasable_id' =>  $event->purchasableID,
-      'purchasable_type' => $event->type
-    ]);
+    /**
+     * Actual Addition Of Product To Cart
+     */
+    AddProductToCart::handle(
+      purchasableID: $event->purchasableID,
+      purchasableType: $event->purchasableType,
+      cart: $cart,
+    );
   }
 
+  /**
+   * [Description for onProductWasRemovedFromCart]
+   *
+   * @param ProductWasRemovedFromCart $event
+   * 
+   * @return void
+   * 
+   */
   public function onProductWasRemovedFromCart(ProductWasRemovedFromCart $event): void {
     $cart = Cart::query()->find(
       id: $event->cartID
     );
 
-    $cart->items()
-    ->where('purchasable_id', $event->purchasableID)
-    ->where('purchasable_type' , $event->type)
-    ->delete();
+    RemoveProductFromCart::handle(
+      purchasableID: $event->purchasableID,
+      purchasableType: $event->purchasableType,
+      cart: $cart,
+    ); 
   }
 
   public function onProductQuantityWasIncreased(ProductQuantityWasIncreased $event): void {
@@ -68,9 +92,9 @@ class CartProjector extends Projector {
       CartAggregate::retrieve(
         uuid: Str::uuid()->toString()
       )->removeProductFromCart(
-        purchasableID: $cartItem->purchasable->id,
+        purchasableID: $cartItem->purchasable_id,
+        purchasableType: $cartItem->purchasable_type,
         cartID: $event->cartID,
-        type: get_class($cartItem->purchasable)
       );
 
       return;
