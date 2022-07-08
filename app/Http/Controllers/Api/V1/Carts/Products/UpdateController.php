@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Api\V1\Carts\Products;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Carts\Products\UpdateRequest;
-use Domains\Customer\Jobs\Cart\UpdateProductQuantity;
+use Domains\Customer\Jobs\Cart\Products\UpdateProductQuantity;
 use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\CartItem;
 use Illuminate\Http\Response;

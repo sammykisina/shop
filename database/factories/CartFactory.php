@@ -20,9 +20,9 @@ class CartFactory extends Factory {
             'status' => Arr::random(
                 array: CartStatus::toLabels()
             ),
-            'coupon' => $useCoupon ? fake()->imei() : null,
+            'coupon' => null,
             'total' => fake()->numberBetween(int1: 1000,int2: 100000),
-            'reduction' => $useCoupon ? fake()->numberBetween(int1: 250, int2: 2500) : 0 ,
+            'reduction' => 0 ,
             'user_id' => User::factory()->create()
         ];
     }

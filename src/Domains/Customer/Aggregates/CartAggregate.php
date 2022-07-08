@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Domains\Customer\Aggregates;
 
 use Domains\Catalog\Models\Variant;
+use Domains\Customer\Events\CouponWasApplied;
 use Domains\Customer\Events\ProductQuantityWasDecreased;
 use Domains\Customer\Events\ProductQuantityWasIncreased;
 use Domains\Customer\Events\ProductWasAddedToCart;
@@ -36,8 +37,6 @@ class CartAggregate extends AggregateRoot {
     
     return $this;
   }
-
-    
   
   /**
    * [Description for removeProductFromCart]
@@ -61,7 +60,6 @@ class CartAggregate extends AggregateRoot {
     return $this;
   }
 
-  
   /**
    * [Description for increaseProductQuantityInCart]
    *
@@ -82,9 +80,16 @@ class CartAggregate extends AggregateRoot {
     );
     return $this;
   }
-
+ 
   /**
-   * Decrease Product Quantity
+   * [Description for decreaseProductQuantityInCart]
+   *
+   * @param int $cartItemID
+   * @param int $cartID
+   * @param int $quantity
+   * 
+   * @return self
+   * 
    */
   public function decreaseProductQuantityInCart(int $cartItemID, int $cartID, int $quantity): self {
     $this->recordThat(
@@ -94,6 +99,26 @@ class CartAggregate extends AggregateRoot {
         quantity: $quantity
       )
     );
+    return $this;
+  }
+
+  /**
+   * [Description for applyCoupon]
+   *
+   * @param int $cartID
+   * @param string $code
+   * 
+   * @return self
+   * 
+   */
+  public function applyCoupon(int $cartID, string $code): self{
+    $this->recordThat(
+      domainEvent: new CouponWasApplied(
+        cartID: $cartID,
+        code: $code
+      )
+    );
+
     return $this;
   }
 }

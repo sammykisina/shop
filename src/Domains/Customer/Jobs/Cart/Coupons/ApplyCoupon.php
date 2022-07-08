@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\Jobs\Cart;
+namespace Domains\Customer\Jobs\Cart\Coupons;
 
 use Domains\Customer\Aggregates\CartAggregate;
 use Domains\Customer\Models\Cart;
-use Domains\Customer\ValueObjects\CartItemValueObject;
+use Domains\Customer\Models\Coupon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -14,32 +14,30 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class AddProductToCart implements ShouldQueue {
+class ApplyCoupon implements ShouldQueue {
     use Dispatchable; 
     use InteractsWithQueue; 
     use Queueable; 
     use SerializesModels;
 
-        
     /**
      * [Description for __construct]
      *
-     * @param  public CartItemValueObject $cartItem
      * @param  public Cart $cart
+     * @param  public Coupon $coupon
      * 
      */
     public function __construct(
-        public CartItemValueObject $cartItem,
-        public Cart $cart
+        public Cart $cart,
+        public string $code
     ){}
-    
+
     public function handle(): void {
         CartAggregate::retrieve(
-            $this->cart->uuid
-        )->addProductToCart(
-            purchasableID: $this->cartItem->purchasableID,
+            uuid: $this->cart->uuid
+        )->applyCoupon(
             cartID: $this->cart->id,
-            purchasableType: $this->cartItem->purchasableType
+            code: $this->code
         )->persist();
     }
 }

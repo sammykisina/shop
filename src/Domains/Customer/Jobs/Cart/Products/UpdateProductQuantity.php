@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\Jobs\Cart;
+namespace Domains\Customer\Jobs\Cart\Products;
 
 use Domains\Customer\Aggregates\CartAggregate;
 use Domains\Customer\Models\Cart;

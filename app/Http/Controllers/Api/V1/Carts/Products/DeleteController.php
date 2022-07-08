@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\V1\Carts\Products;
 
 use App\Http\Controllers\Controller;
-use Domains\Customer\Jobs\Cart\RemoveProductFromCart;
+use Domains\Customer\Jobs\Cart\Products\RemoveProductFromCart;
 use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\CartItem;
 use Illuminate\Http\Request;

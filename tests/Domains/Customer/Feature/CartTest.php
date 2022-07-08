@@ -3,12 +3,14 @@
 declare(strict_types=1);
 
 use Domains\Catalog\Models\Variant;
+use Domains\Customer\Events\CouponWasApplied;
 use Domains\Customer\Events\ProductQuantityWasDecreased;
 use Domains\Customer\Events\ProductQuantityWasIncreased;
 use Domains\Customer\Events\ProductWasAddedToCart;
 use Domains\Customer\Events\ProductWasRemovedFromCart;
 use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\CartItem;
+use Domains\Customer\Models\Coupon;
 use Domains\Customer\States\Statuses\CartStatus;
 use Illuminate\Testing\Fluent\AssertableJson;
 use JustSteveKing\StatusCode\Http;
@@ -138,7 +140,7 @@ it('can remove item from cart when the quantity is zero', function () {
 });
 
 it('can remove an item from the cart', function() {
-   expect(value: EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
+  expect(value: EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
   $cartItem = CartItem::factory()->create([
     'quantity' => 3
   ]);
@@ -154,4 +156,24 @@ it('can remove an item from the cart', function() {
 
   expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 1);
   expect(EloquentStoredEvent::query()->first()->event_class)->toEqual(expected: ProductWasRemovedFromCart::class);
+});
+
+it('can apply coupon to the cart', function () {
+  expect(value: EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
+  $coupon = Coupon::factory()->create();
+  $cart = Cart::factory()->create();
+
+  expect(value: $cart)->reduction->toEqual(expected: 0);
+
+  post(
+    route(name: 'api:v1:carts:coupons:store', parameters: $cart->uuid),
+    data: [
+      'code' => $coupon->code
+    ]
+  )->assertStatus(
+    status: Http::ACCEPTED
+  );
+
+ expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 1);
+ expect(EloquentStoredEvent::query()->first()->event_class)->toEqual(expected: CouponWasApplied::class);
 });

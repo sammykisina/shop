@@ -38,23 +38,29 @@ Route::prefix('carts')->as('carts:')->group( function() {
      */
     Route::get('/', App\Http\Controllers\Api\V1\Carts\IndexController::class)->name('index'); 
 
-    // /**
-    //  * Create A New Cart
-    //  */
+    /**
+     * Create A New Cart
+     */
     Route::post('/',App\Http\Controllers\Api\V1\Carts\StoreController::class)->name('store');
 
-    // /**
-    //  * Add Product To Cart
-    //  */
+    /**
+     * Add Product To Cart
+     */
     Route::post('{cart:uuid}/products',App\Http\Controllers\Api\V1\Carts\Products\StoreController::class)->name('products:store');
 
-    // /**
-    //  * Update Quantity
-    //  */
+    /**
+     * Update Quantity
+     */
     Route::patch('{cart:uuid}/products/{item:uuid}',App\Http\Controllers\Api\V1\Carts\Products\UpdateController::class)->name('products:update');
 
-    // /**
-    //  * Delete Product From Cart
-    //  */
+    /**
+     * Delete Product From Cart
+     */
     Route::delete('{cart:uuid}/products/{item:uuid}',App\Http\Controllers\Api\V1\Carts\Products\DeleteController::class)->name('products:delete');
+
+    /**
+     * Add A Coupon To Cart
+     */
+    Route::post('{cart:uuid}/coupons',App\Http\Controllers\Api\V1\Carts\Coupons\StoreController::class)->name('coupons:store');
+
 });

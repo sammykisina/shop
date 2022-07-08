@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Api\V1\Carts;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\V1\Cart\CartResource;
-use Domains\Customer\Actions\CreateCart;
+use Domains\Customer\Actions\Cart\CreateCart;
 use Domains\Customer\Factories\CartFactory;
 use Domains\Customer\States\Statuses\CartStatus;
 use Illuminate\Http\JsonResponse;
