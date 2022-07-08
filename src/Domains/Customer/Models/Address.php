@@ -11,9 +11,9 @@ use Domains\Shared\Models\Concerns\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Address extends Model {
+class Address extends Model
+{
     use HasUuid;
     use HasFactory;
 
@@ -28,22 +28,24 @@ class Address extends Model {
         'billing' => 'boolean'
     ];
 
-    public function user(): BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(
             related: User::class,
             foreignKey: 'user_id'
         );
     }
 
-    public function location(): BelongsTo {
-       return $this->belongsTo(
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(
             related: Location::class,
             foreignKey: 'location_id'
-       );
+        );
     }
 
-    public static function newFactory(): AddressFactory {
-       return new AddressFactory();
+    public static function newFactory(): AddressFactory
+    {
+        return new AddressFactory();
     }
-
 }

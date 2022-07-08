@@ -12,11 +12,13 @@ use Domains\Customer\Models\Coupon;
 use Illuminate\Http\Response;
 use JustSteveKing\StatusCode\Http;
 
-class StoreController extends Controller {
-    public function __invoke(StoreRequest $request, Cart $cart): Response {
+class StoreController extends Controller
+{
+    public function __invoke(StoreRequest $request, Cart $cart): Response
+    {
         // $coupon = Coupon::query()->where(
         //     'code',
-        //     $request->get(key: 'code')       
+        //     $request->get(key: 'code')
         // )->firstOrFail();
 
         ApplyCoupon::dispatch(

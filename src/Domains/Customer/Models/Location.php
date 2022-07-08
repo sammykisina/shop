@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Location extends Model  {
+class Location extends Model
+{
     use HasUuid;
     use HasFactory;
 
@@ -26,15 +27,16 @@ class Location extends Model  {
         'country'
     ];
 
-    public function addresses(): HasMany {
-      return $this->hasMany(
-          related: Address::class,
-          foreignKey: 'location_id'
-      );
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(
+            related: Address::class,
+            foreignKey: 'location_id'
+        );
     }
-    
-    protected static function newFactory(): LocationFactory {
-      return new LocationFactory();
+
+    protected static function newFactory(): LocationFactory
+    {
+        return new LocationFactory();
     }
 }
-

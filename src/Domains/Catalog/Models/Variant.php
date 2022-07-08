@@ -13,11 +13,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-class Variant extends Model {
-  use HasFactory;
-  use HasUuid;
+class Variant extends Model
+{
+    use HasFactory;
+    use HasUuid;
 
-  protected $fillable = [
+    protected $fillable = [
     'uuid',
     'name',
     'cost',
@@ -30,33 +31,37 @@ class Variant extends Model {
     'product_id'
   ];
 
-  protected $cast = [
+    protected $cast = [
     'active' => 'boolean',
     'shippable' => 'boolean'
   ];
 
-  public function product(): BelongsTo {
-    return $this->belongsTo(
-      related: Product::class,
-      foreignKey:'product_id'
-    );
-  }
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(
+            related: Product::class,
+            foreignKey:'product_id'
+        );
+    }
 
-  public function purchases(): MorphMany {
-    return $this->morphMany(
-      related: CartItem::class,
-      name: 'purchasable'
-    );
-  }
+    public function purchases(): MorphMany
+    {
+        return $this->morphMany(
+            related: CartItem::class,
+            name: 'purchasable'
+        );
+    }
 
-  public function orders(): MorphMany {
-    return $this->morphMany(
-      related: OrderLine::class,
-      name: 'purchasable'
-    );
-  }
+    public function orders(): MorphMany
+    {
+        return $this->morphMany(
+            related: OrderLine::class,
+            name: 'purchasable'
+        );
+    }
 
-  protected static function newFactory(): VariantFactory {
-    return new VariantFactory();
-  }
+    protected static function newFactory(): VariantFactory
+    {
+        return new VariantFactory();
+    }
 }

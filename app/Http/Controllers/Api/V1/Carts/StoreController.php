@@ -13,12 +13,14 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use JustSteveKing\StatusCode\Http;
 
-class StoreController extends Controller {
+class StoreController extends Controller
+{
     /**
      * @param Request $request
-     * @return JsonResponse 
+     * @return JsonResponse
      */
-    public function __invoke(Request $request) {
+    public function __invoke(Request $request)
+    {
         $cart = CreateCart::handle(
             cart: CartFactory::make(
                 attributes: [

@@ -7,11 +7,12 @@ namespace Database\Factories;
 use Domains\Customer\Models\Coupon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CouponFactory extends Factory {
-    
+class CouponFactory extends Factory
+{
     protected $model = Coupon::class;
-    public function definition(): array {
-        $max_uses = fake()->numberBetween(int1:10,int2: 1000);
+    public function definition(): array
+    {
+        $max_uses = fake()->numberBetween(int1:10, int2: 1000);
         return [
             'code' => fake()->bothify(
                 string: 'COUP-????-????',

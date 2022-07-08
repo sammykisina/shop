@@ -12,37 +12,41 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Range extends Model { // Summer_2022_Conference etc
-  use HasFactory;
-  use HasUuid;
+class Range extends Model
+{ // Summer_2022_Conference etc
+    use HasFactory;
+    use HasUuid;
 
-  public $timestamps = false;
+    public $timestamps = false;
 
-  protected $fillable = [
+    protected $fillable = [
     'uuid',
     'name',
     'description',
     'active'
   ];
 
-  protected $casts = [ 
+    protected $casts = [
     'active' => 'boolean'
   ];
 
-  public function products(): HasMany {
-    return $this->hasMany(
-      related: Product::class,
-      foreignKey: 'range_id'
-    );
-  }
+    public function products(): HasMany
+    {
+        return $this->hasMany(
+            related: Product::class,
+            foreignKey: 'range_id'
+        );
+    }
 
-  public function newEloquentBuilder($query): Builder {
-    return new RangeBuilder(
-      query: $query
-    );
-  }
+    public function newEloquentBuilder($query): Builder
+    {
+        return new RangeBuilder(
+            query: $query
+        );
+    }
 
-  protected static function newFactory(): RangeFactory {
-    return new RangeFactory();
-  }
+    protected static function newFactory(): RangeFactory
+    {
+        return new RangeFactory();
+    }
 }

@@ -12,9 +12,11 @@ use Illuminate\Http\Response;
 use JustSteveKing\StatusCode\Http;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
-class IndexController extends Controller {
-    public function __invoke(Request $request): SymfonyResponse {
-        if(!auth()->check() || !auth()->user()->cart()->count()){
+class IndexController extends Controller
+{
+    public function __invoke(Request $request): SymfonyResponse
+    {
+        if (!auth()->check() || !auth()->user()->cart()->count()) {
             return new Response(
                 content: null,
                 status: Http::NO_CONTENT

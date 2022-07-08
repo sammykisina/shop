@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 declare(strict_types=1);
 
@@ -13,4 +14,6 @@ use Spatie\Enum\Laravel\Enum;
  * @method static self cancelled()
  */
 
-final class OrderStatus extends Enum {}
+final class OrderStatus extends Enum
+{
+}

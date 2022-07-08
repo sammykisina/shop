@@ -12,15 +12,17 @@ use Illuminate\Http\Request;
 use JustSteveKing\StatusCode\Http;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class ShowController extends Controller {
-    public function __invoke(Request $request,string $uuid): JsonResponse {
-       $product = QueryBuilder::for(
+class ShowController extends Controller
+{
+    public function __invoke(Request $request, string $uuid): JsonResponse
+    {
+        $product = QueryBuilder::for(
             subject:Product::class,
-       )->allowedIncludes(
-            includes:['category','range','variants']
+        )->allowedIncludes(
+           includes:['category','range','variants']
        )->where('uuid', $uuid)->firstOrFail();
 
-       return response()->json(
+        return response()->json(
             data: new ProductResource(
                 resource: $product
             ),

@@ -9,10 +9,11 @@ use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\CartItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CartItemFactory extends Factory {
-    
+class CartItemFactory extends Factory
+{
     protected $model = CartItem::class;
-    public function definition(): array {
+    public function definition(): array
+    {
         $variant = Variant::factory()->create();
         $cart = Cart::factory()->create();
 

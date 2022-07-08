@@ -11,11 +11,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class CartItem extends Model {
-  use HasFactory;
-  use HasUuid;
+class CartItem extends Model
+{
+    use HasFactory;
+    use HasUuid;
 
-  protected $fillable = [
+    protected $fillable = [
     'uuid',
     'purchasable_id',
     'purchasable_type',
@@ -23,18 +24,21 @@ class CartItem extends Model {
     'cart_id'
   ];
 
-  public function cart(): BelongsTo {
-    return $this->belongsTo(
-      related: Cart::class,
-      foreignKey: 'cart_id'
-    );
-  }
+    public function cart(): BelongsTo
+    {
+        return $this->belongsTo(
+            related: Cart::class,
+            foreignKey: 'cart_id'
+        );
+    }
 
-  public function purchasable(): MorphTo {
-    return $this->morphTo();
-  }
+    public function purchasable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 
-  protected static function newFactory(): CartItemFactory {
-    return new CartItemFactory();
-  }
+    protected static function newFactory(): CartItemFactory
+    {
+        return new CartItemFactory();
+    }
 }

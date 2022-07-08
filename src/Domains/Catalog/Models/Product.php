@@ -13,11 +13,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Product extends Model {
-  use HasFactory;
-  use HasUuid;
+class Product extends Model
+{
+    use HasFactory;
+    use HasUuid;
 
-  protected $fillable = [
+    protected $fillable = [
     'uuid',
     'name',
     'description',
@@ -29,39 +30,44 @@ class Product extends Model {
     'range_id'
   ];
 
-  protected $casts = [
+    protected $casts = [
     'active' => 'boolean',
     'vat' => 'boolean'
   ];
 
-  public function category(): BelongsTo {
-    return $this->belongsTo(
-      related: Category::class,
-      foreignKey:"category_id"
-    );
-  }
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(
+            related: Category::class,
+            foreignKey:"category_id"
+        );
+    }
 
-  public function range(): BelongsTo {
-    return $this->belongsTo(
-      related: Range::class,
-      foreignKey:"range_id"
-    );
-  }
+    public function range(): BelongsTo
+    {
+        return $this->belongsTo(
+            related: Range::class,
+            foreignKey:"range_id"
+        );
+    }
 
-  public function variants(): HasMany {
-    return $this->hasMany(
-      related: Variant::class,
-      foreignKey: 'product_id'
-    );
-  }
+    public function variants(): HasMany
+    {
+        return $this->hasMany(
+            related: Variant::class,
+            foreignKey: 'product_id'
+        );
+    }
 
-  public function newEloquentBuilder($query): Builder {
-    return new ProductBuilder(
-      query: $query
-    );
-  }
+    public function newEloquentBuilder($query): Builder
+    {
+        return new ProductBuilder(
+            query: $query
+        );
+    }
 
-  protected static function newFactory(): ProductFactory {
-    return new ProductFactory();
-  }
+    protected static function newFactory(): ProductFactory
+    {
+        return new ProductFactory();
+    }
 }

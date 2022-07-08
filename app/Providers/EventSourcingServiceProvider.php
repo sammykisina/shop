@@ -8,14 +8,16 @@ use Domains\Customer\Projectors\CartProjector;
 use Illuminate\Support\ServiceProvider;
 use Spatie\EventSourcing\Facades\Projectionist;
 
-class EventSourcingServiceProvider extends ServiceProvider {
-    public function register(): void {
+class EventSourcingServiceProvider extends ServiceProvider
+{
+    public function register(): void
+    {
         Projectionist::addProjectors([
-           CartProjector::class 
+           CartProjector::class
         ]);
     }
 
-    public function boot(): void{
-        
+    public function boot(): void
+    {
     }
 }

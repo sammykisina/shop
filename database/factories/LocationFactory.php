@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use JustSteveKing\LaravelPostcodes\Service\PostcodeService;
 use Illuminate\Support\Str;
 
-
-class LocationFactory extends Factory {
-
+class LocationFactory extends Factory
+{
     protected $model = Location::class;
-   
-    public function definition(): array {
+
+    public function definition(): array
+    {
         $service = resolve(PostcodeService::class);
         $location = $service->getRandomPostCode();
         $stressAddress = $this->faker->streetAddress;
@@ -25,8 +25,8 @@ class LocationFactory extends Factory {
             'ward' => data_get(target: $location, key:'admin_ward'),
             'district' => data_get(target: $location, key: 'admin_district'),
             'county' => data_get(target: $location, key:'admin_county'),
-            'postcode' => data_get(target:$location,key:'postcode'),
-            'country' => data_get(target:$location,key:'country')
+            'postcode' => data_get(target:$location, key:'postcode'),
+            'country' => data_get(target:$location, key:'country')
         ];
     }
 }

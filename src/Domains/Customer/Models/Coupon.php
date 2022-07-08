@@ -9,11 +9,12 @@ use Domains\Shared\Models\Concerns\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Coupon extends Model {
-  use HasFactory;
-  use HasUuid;
+class Coupon extends Model
+{
+    use HasFactory;
+    use HasUuid;
 
-  protected $fillable = [
+    protected $fillable = [
     'uuid',
     'code',
     'reduction',
@@ -22,11 +23,12 @@ class Coupon extends Model {
     'active'
   ];
 
-  protected $cast = [
+    protected $cast = [
     'active' => 'boolean'
   ];
 
-  protected static function newFactory(): CouponFactory {
-    return new CouponFactory();
-  }
+    protected static function newFactory(): CouponFactory
+    {
+        return new CouponFactory();
+    }
 }

@@ -10,10 +10,11 @@ use Domains\Customer\States\Statuses\CartStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 
-class CartFactory extends Factory {
-    
+class CartFactory extends Factory
+{
     protected $model = Cart::class;
-    public function definition(): array {
+    public function definition(): array
+    {
         $useCoupon = fake()->boolean();
 
         return [
@@ -21,7 +22,7 @@ class CartFactory extends Factory {
                 array: CartStatus::toLabels()
             ),
             'coupon' => null,
-            'total' => fake()->numberBetween(int1: 1000,int2: 100000),
+            'total' => fake()->numberBetween(int1: 1000, int2: 100000),
             'reduction' => 0 ,
             'user_id' => User::factory()->create()
         ];

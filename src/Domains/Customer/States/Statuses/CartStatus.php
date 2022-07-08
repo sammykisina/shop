@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 declare(strict_types=1);
 
@@ -12,4 +13,6 @@ use Spatie\Enum\Laravel\Enum;
  * @method static self abandoned()
  */
 
-final class CartStatus extends Enum {}
+final class CartStatus extends Enum
+{
+}

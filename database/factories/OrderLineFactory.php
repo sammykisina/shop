@@ -9,10 +9,11 @@ use Domains\Customer\Models\Order;
 use Domains\Customer\Models\OrderLine;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class OrderLineFactory extends Factory {
-    
+class OrderLineFactory extends Factory
+{
     protected $model = OrderLine::class;
-    public function definition(): array {
+    public function definition(): array
+    {
         $variant = Variant::query()->inRandomOrder()->first();
         return [
             'name' => $variant->name,

@@ -6,8 +6,10 @@ namespace App\Http\Resources\Api\V1\Catalog;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductResource extends JsonResource {
-    public function toArray($request): array {
+class ProductResource extends JsonResource
+{
+    public function toArray($request): array
+    {
         return [
             'id' => $this->id,
             'type' => 'product',

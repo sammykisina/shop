@@ -6,8 +6,10 @@ namespace App\Http\Resources\Api\V1\Cart;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CartItemResource extends JsonResource {
-    public function toArray($request): array {
+class CartItemResource extends JsonResource
+{
+    public function toArray($request): array
+    {
         return [
             'id' => $this->uuid,
             'type' => 'cart-item',

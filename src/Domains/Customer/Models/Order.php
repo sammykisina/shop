@@ -10,11 +10,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Order extends Model {
-  use HasFactory;
-  use HasUuid;
+class Order extends Model
+{
+    use HasFactory;
+    use HasUuid;
 
-  protected $fillable = [
+    protected $fillable = [
     'uuid',
     'number',
     'state',
@@ -28,33 +29,37 @@ class Order extends Model {
     'cancelled_at'
   ];
 
-  protected $cast = [
+    protected $cast = [
     'completed_at' => 'datetime',
     'cancelled_at' => 'datetime'
   ];
 
-  public function user(): BelongsTo {
-    return $this->belongsTo(
-      related: User::class,
-      foreignKey: 'user_id'
-    );
-  }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(
+            related: User::class,
+            foreignKey: 'user_id'
+        );
+    }
 
-  public function shipping(): BelongsTo {
-    return $this->belongsTo(
-      related: Location::class,
-      foreignKey: 'shipping_id'
-    );
-  }
+    public function shipping(): BelongsTo
+    {
+        return $this->belongsTo(
+            related: Location::class,
+            foreignKey: 'shipping_id'
+        );
+    }
 
-  public function billing(): BelongsTo {
-    return $this->belongsTo(
-      related: Location::class,
-      foreignKey: 'billing_id'
-    );
-  }
+    public function billing(): BelongsTo
+    {
+        return $this->belongsTo(
+            related: Location::class,
+            foreignKey: 'billing_id'
+        );
+    }
 
-  protected static function newFactory(): OrderFactory {
-    return new OrderFactory();
-  }
-} 
+    protected static function newFactory(): OrderFactory
+    {
+        return new OrderFactory();
+    }
+}

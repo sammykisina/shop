@@ -6,9 +6,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
-  
-    public function up(): void {
+return new class () extends Migration {
+    public function up(): void
+    {
         Schema::create('order_lines', function (Blueprint $table) {
             $table->id();
             $table->uuid(column: 'uuid')->unique();
@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string(column: 'name');
             $table->mediumText(column: 'description');
 
-            $table->unsignedBigInteger(column:'cost');  
+            $table->unsignedBigInteger(column:'cost');
             $table->unsignedBigInteger(column:'retail');
             $table->unsignedInteger(column:'quantity');
 
@@ -32,7 +32,8 @@ return new class extends Migration {
         });
     }
 
-    public function down(): void {
+    public function down(): void
+    {
         Schema::dropIfExists('order_lines');
     }
 };

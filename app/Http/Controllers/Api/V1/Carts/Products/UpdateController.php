@@ -12,18 +12,20 @@ use Domains\Customer\Models\CartItem;
 use Illuminate\Http\Response;
 use JustSteveKing\StatusCode\Http;
 
-class UpdateController extends Controller {
+class UpdateController extends Controller
+{
     /**
      * [Description for __invoke]
      *
      * @param UpdateRequest $request
      * @param Cart $cart
      * @param CartItem $item
-     * 
+     *
      * @return Response
-     * 
+     *
      */
-    public function __invoke(UpdateRequest $request, Cart $cart, CartItem $item): Response {
+    public function __invoke(UpdateRequest $request, Cart $cart, CartItem $item): Response
+    {
         UpdateProductQuantity::dispatch(
             cart: $cart,
             item: $item,

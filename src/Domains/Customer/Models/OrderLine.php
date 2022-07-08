@@ -9,26 +9,28 @@ use Domains\Shared\Models\Concerns\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderLine extends Model {
-  use HasFactory;
-  use HasUuid;
+class OrderLine extends Model
+{
+    use HasFactory;
+    use HasUuid;
 
-  // protected $fillable = [
-  //   'uuid',
-  //   'name',
-  //   'description',
-  //   'retail',
-  //   'cost',
-  //   'quantity',
-  //   'purchasable_id',
-  //   'purchasable_type'
-  // ];
+    // protected $fillable = [
+    //   'uuid',
+    //   'name',
+    //   'description',
+    //   'retail',
+    //   'cost',
+    //   'quantity',
+    //   'purchasable_id',
+    //   'purchasable_type'
+    // ];
 
-  protected $cast = [
+    protected $cast = [
     //
   ];
 
-  protected static function newFactory(): OrderLineFactory {
-    return new OrderLineFactory();
-  }
+    protected static function newFactory(): OrderLineFactory
+    {
+        return new OrderLineFactory();
+    }
 }

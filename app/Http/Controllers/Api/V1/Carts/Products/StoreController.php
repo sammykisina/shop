@@ -12,19 +12,19 @@ use Domains\Customer\Models\Cart;
 use Illuminate\Http\Response;
 use JustSteveKing\StatusCode\Http;
 
-class StoreController extends Controller {
-       
-
+class StoreController extends Controller
+{
     /**
      * [Description for __invoke]
      *
      * @param ProductRequest $request
      * @param Cart $cart
-     * 
+     *
      * @return Response
-     * 
+     *
      */
-    public function __invoke(ProductRequest $request, Cart $cart): Response {
+    public function __invoke(ProductRequest $request, Cart $cart): Response
+    {
         AddProductToCart::dispatch(
             CartItemFactory::make(
                 attributes: $request->validated()

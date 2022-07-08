@@ -12,8 +12,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use JustSteveKing\StatusCode\Http;
 
-class DeleteController extends Controller {
-    public function __invoke(Request $request,Cart $cart,CartItem $item): Response {
+class DeleteController extends Controller
+{
+    public function __invoke(Request $request, Cart $cart, CartItem $item): Response
+    {
         /**
          * Passing The Delete Processes To An UnderGround Job
          */

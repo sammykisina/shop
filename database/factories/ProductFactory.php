@@ -9,15 +9,16 @@ use Domains\Catalog\Models\Product;
 use Domains\Catalog\Models\Range;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProductFactory extends Factory {
-
+class ProductFactory extends Factory
+{
     protected $model = Product::class;
-    public function definition(): array {
-        $cost = fake()->numberBetween(int1:100,int2:100000);
+    public function definition(): array
+    {
+        $cost = fake()->numberBetween(int1:100, int2:100000);
 
         return [
             'name' => fake()->words(nb: 4, asText:true),
-            'description' => fake()->paragraphs(nb:2,asText:true),
+            'description' => fake()->paragraphs(nb:2, asText:true),
             'cost' => $cost,
             'retail' => ($cost *  config(key:'shop.profit_margin')), // Profit Is 40% Of The Cost
             'active' => fake()->boolean(),
