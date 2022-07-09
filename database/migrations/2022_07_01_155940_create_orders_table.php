@@ -14,7 +14,7 @@ return new class () extends Migration {
             $table->uuid(column: 'uuid')->unique();
 
             $table->string(column: 'number')->unique();
-            $table->string(column:'state');
+            $table->string(column:'status');
             $table->string(column: 'coupon')->nullable();
 
             $table->unsignedBigInteger(column: 'total')->default(0);

@@ -4,33 +4,33 @@ declare(strict_types=1);
 
 namespace Domains\Customer\Aggregates;
 
-use Domains\Customer\Events\CouponWasApplied;
-use Domains\Customer\Events\ProductQuantityWasDecreased;
-use Domains\Customer\Events\ProductQuantityWasIncreased;
-use Domains\Customer\Events\ProductWasAddedToCart;
-use Domains\Customer\Events\ProductWasRemovedFromCart;
+use Domains\Customer\Events\Carts\CouponWasApplied;
+use Domains\Customer\Events\Carts\ProductQuantityWasDecreased;
+use Domains\Customer\Events\Carts\ProductQuantityWasIncreased;
+use Domains\Customer\Events\Carts\ProductWasAddedToCart;
+use Domains\Customer\Events\Carts\ProductWasRemovedFromCart;
 use Spatie\EventSourcing\AggregateRoots\AggregateRoot;
 
 class CartAggregate extends AggregateRoot
 {
-  /**
-   * [Description for addProductToCart]
-   *
-   * @param int $purchasableID
-   * @param int $cartID
-   * @param string $purchasableType
-   *
-   * @return self
-   *
-   */
+    /**
+     * [Description for addProductToCart]
+     *
+     * @param int $purchasableID
+     * @param int $cartID
+     * @param string $purchasableType
+     *
+     * @return self
+     *
+     */
     public function addProductToCart(int $purchasableID, int $cartID, string $purchasableType): self
     {
         $this->recordThat(
             domainEvent: new ProductWasAddedToCart(
-          purchasableID: $purchasableID,
-          cartID: $cartID,
-          purchasableType: $purchasableType
-      )
+                purchasableID: $purchasableID,
+                cartID: $cartID,
+                purchasableType: $purchasableType
+            )
         );
 
         return $this;
@@ -50,10 +50,10 @@ class CartAggregate extends AggregateRoot
     {
         $this->recordThat(
             domainEvent: new ProductWasRemovedFromCart(
-          purchasableID: $purchasableID,
-          purchasableType: $purchasableType,
-          cartID:$cartID,
-      )
+                purchasableID: $purchasableID,
+                purchasableType: $purchasableType,
+                cartID:$cartID,
+            )
         );
 
         return $this;
@@ -73,10 +73,10 @@ class CartAggregate extends AggregateRoot
     {
         $this->recordThat(
             domainEvent: new ProductQuantityWasIncreased(
-          cartItemID: $cartItemID,
-          cartID: $cartID,
-          quantity: $quantity
-      )
+                cartItemID: $cartItemID,
+                cartID: $cartID,
+                quantity: $quantity
+            )
         );
         return $this;
     }
@@ -95,10 +95,10 @@ class CartAggregate extends AggregateRoot
     {
         $this->recordThat(
             domainEvent: new ProductQuantityWasDecreased(
-          cartItemID: $cartItemID,
-          cartID: $cartID,
-          quantity: $quantity
-      )
+                cartItemID: $cartItemID,
+                cartID: $cartID,
+                quantity: $quantity
+            )
         );
         return $this;
     }
@@ -116,9 +116,9 @@ class CartAggregate extends AggregateRoot
     {
         $this->recordThat(
             domainEvent: new CouponWasApplied(
-          cartID: $cartID,
-          code: $code
-      )
+                cartID: $cartID,
+                code: $code
+            )
         );
 
         return $this;

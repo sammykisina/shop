@@ -15,8 +15,6 @@ class CartFactory extends Factory
     protected $model = Cart::class;
     public function definition(): array
     {
-        $useCoupon = fake()->boolean();
-
         return [
             'status' => Arr::random(
                 array: CartStatus::toLabels()

@@ -18,7 +18,7 @@ class Order extends Model
     protected $fillable = [
     'uuid',
     'number',
-    'state',
+    'status',
     'coupon',
     'total',
     'reduction',

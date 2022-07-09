@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -59,4 +61,19 @@ Route::prefix('carts')->as('carts:')->group(function () {
      * Add A Coupon To Cart
      */
     Route::post('{cart:uuid}/coupons', App\Http\Controllers\Api\V1\Carts\Coupons\StoreController::class)->name('coupons:store');
+
+    /**
+     * Remove Coupon From Cart
+     */
+    Route::delete('{cart:uuid}/coupons/{uuid}', App\Http\Controllers\Api\V1\Carts\Coupons\DeleteController::class)->name('coupon:delete');
+});
+
+/**
+ * Order Routes
+ */
+Route::prefix('orders')->as('orders:')->group(function () {
+    /**
+     * Turn A Cart Into An Order
+     */
+    Route::post('/', App\Http\Controllers\Api\V1\Orders\StoreController::class)->name('store');
 });

@@ -9,6 +9,15 @@ use Domains\Customer\Models\Coupon;
 
 class ApplyCoupon
 {
+    /**
+     * [Description for handle]
+     *
+     * @param int $cartID
+     * @param string $code
+     *
+     * @return void
+     *
+     */
     public static function handle(int $cartID, string $code): void
     {
         $coupon = Coupon::query()->where(
