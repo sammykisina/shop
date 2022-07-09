@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use Domains\Catalog\Models\Variant;
+use Domains\Customer\Events\Carts\CouponWasApplied;
+use Domains\Customer\Events\Carts\ProductQuantityWasDecreased;
 use Domains\Customer\Events\Carts\ProductQuantityWasIncreased;
 use Domains\Customer\Events\Carts\ProductWasAddedToCart;
 use Domains\Customer\Events\Carts\ProductWasRemovedFromCart;
@@ -86,6 +88,45 @@ dataset(
         'quantity' => 1
       ])->id,
       quantity: 1
+    )
+  ]
+);
+
+
+dataset(
+  name: 'productQuantityWasDecreasedEvent',
+  dataset:[
+    fn() => new ProductQuantityWasDecreased(
+      cartID: ($cart = Cart::factory()->create())->id,
+      cartItemID:CartItem::factory()->create([ 
+        'cart_id' => $cart->id,
+        'quantity' => 3
+        ])->id,
+        quantity: 2
+        )
+        ]
+      );
+      
+dataset(
+  name: 'productQuantityWasDecreasedWithMoreQuantityThanWhatsInCartEvent',
+  dataset:[
+    fn() => new ProductQuantityWasDecreased(
+      cartID: ($cart = Cart::factory()->create())->id,
+      cartItemID:CartItem::factory()->create([ 
+        'cart_id' => $cart->id,
+        'quantity' => 1
+      ])->id,
+      quantity: 5
+    )
+  ]
+);
+
+dataset(
+  name: 'applyCouponEvent',
+  dataset:[
+    fn() => new CouponWasApplied(
+      cartID: Cart::factory()->create()->id,
+      code: Coupon::factory()->create()->code
     )
   ]
 );
