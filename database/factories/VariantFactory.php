@@ -17,7 +17,6 @@ class VariantFactory extends Factory
         $cost = fake()->boolean() ? $product->cost : ($product->cost + fake()->numberBetween(int1:100, int2:7500));
         $shippable = fake()->boolean();
 
-
         return [
             'name' => fake()->words(nb:3, asText:true),
             'cost' => $cost,

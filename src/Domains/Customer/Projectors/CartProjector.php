@@ -8,14 +8,14 @@ use Domains\Customer\Actions\Cart\Coupons\ApplyCoupon;
 use Domains\Customer\Actions\Cart\Products\AddProductToCart;
 use Domains\Customer\Actions\Cart\Products\RemoveProductFromCart;
 use Domains\Customer\Aggregates\CartAggregate;
-use Domains\Customer\Events\CouponWasApplied;
-use Domains\Customer\Events\ProductQuantityWasDecreased;
-use Domains\Customer\Events\ProductQuantityWasIncreased;
-use Domains\Customer\Events\ProductWasAddedToCart;
-use Domains\Customer\Events\ProductWasRemovedFromCart;
+use Domains\Customer\Events\Carts\CouponWasApplied;
+use Domains\Customer\Events\Carts\ProductQuantityWasDecreased;
+use Domains\Customer\Events\Carts\ProductQuantityWasIncreased;
+use Domains\Customer\Events\Carts\ProductWasAddedToCart;
+use Domains\Customer\Events\Carts\ProductWasRemovedFromCart;
 use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\CartItem;
-use Domains\Customer\Models\Coupon;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 use Illuminate\Support\Str;
 
@@ -38,11 +38,18 @@ class CartProjector extends Projector
         /**
          * Actual Addition Of Product To Cart
          */
-        AddProductToCart::handle(
+        $cartItem = AddProductToCart::handle(
             purchasableID: $event->purchasableID,
             purchasableType: $event->purchasableType,
             cart: $cart,
         );
+
+        /**
+         * Update The Cart Total
+         */
+        $cart->update([
+            'total' => ($cart->total + $cartItem->purchasable->retail)
+        ]);
     }
 
     /**
@@ -77,18 +84,13 @@ class CartProjector extends Projector
     public function onProductQuantityWasIncreased(ProductQuantityWasIncreased $event): void
     {
         $cartItem = CartItem::query()
-    ->where(
-        column: 'cart_id',
-        value: $event->cartID
-    )
-    ->where(
-        column: 'id',
-        value: $event->cartItemID
-    )->first();
+            ->where('cart_id',$event->cartID)
+            ->where('id',$event->cartItemID)
+            ->first();
 
-        $cartItem->update(values: [
-      'quantity' => ($cartItem->quantity + $event->quantity)
-    ]);
+        $cartItem->update([
+            'quantity' => ($cartItem->quantity + $event->quantity)
+        ]);
     }
 
     /**

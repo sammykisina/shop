@@ -21,11 +21,9 @@ class AddProductToCart
    */
     public static function handle(int $purchasableID, string $purchasableType, Cart $cart): Model
     {
-        return $cart->items()->create(
-            [
-      'purchasable_id' => $purchasableID,
-      'purchasable_type' => $purchasableType,
-      ]
-        );
+      return $cart->items()->create( [
+        'purchasable_id' => $purchasableID,
+        'purchasable_type' => $purchasableType,
+      ]);
     }
 }
