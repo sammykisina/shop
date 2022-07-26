@@ -77,3 +77,12 @@ Route::prefix('orders')->as('orders:')->group(function () {
      */
     Route::post('/', App\Http\Controllers\Api\V1\Orders\StoreController::class)->name('store');
 });
+
+/**
+ * Stripe Webhooks
+ */
+Route::middleware(['stripe-webhooks'])->group(function () {
+    Route::post('stripe/webhooks',App\Http\Controllers\Api\V1\Orders\StripeWebhookController::class)->name('stripe:webhooks'); 
+});
+
+  

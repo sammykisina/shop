@@ -18,6 +18,7 @@ class OrderAggregate extends AggregateRoot
             shipping: $order->shipping,
             billing: $order->billing,
             userID: auth()->id(),
+            intent: $order->intent
           )
         );
 

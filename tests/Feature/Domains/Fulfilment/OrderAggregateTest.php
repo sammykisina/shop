@@ -24,7 +24,8 @@ it('can not create an order from  a cart for an unauthenticated user', function 
       'cart' => $cartItem->cart->uuid,
       'email' => 'sammy@gmail.com',
       'shipping' => $location->id,
-      'billing' => $location->id
+      'billing' => $location->id,
+      'intent' => 'intent'
     ]
     )->assertStatus(
         status: Http::UNAUTHORIZED
@@ -42,7 +43,8 @@ it('can create an order from  a cart for an authenticated user', function (CartI
         data:[
       'cart' => $cartItem->cart->uuid,
       'shipping' => $location->id,
-      'billing' => $location->id
+      'billing' => $location->id,
+      'intent' => 'intent'
     ]
     )->assertStatus(
         status: Http::CREATED

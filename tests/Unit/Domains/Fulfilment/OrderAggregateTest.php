@@ -22,16 +22,18 @@ it('it can store an order was created event for an authenticated user', function
         cart: $cartItem->cart->uuid,
         shipping: $location->id,
         billing: $location->id,
-        userID: auth()->id()
+        userID: auth()->id(),
+        intent: null
     )
    )->when(
         callable: function (OrderAggregate $aggregate) use ($cartItem, $location) {
           $aggregate->createOrder(
             order: OrderFactory::make(
                 attributes:[
-                    'cart' =>  $cartItem->cart->uuid,
-                    'shipping' => $location->id,
-                    'billing' =>  $location->id,
+                  'cart' =>  $cartItem->cart->uuid,
+                  'shipping' => $location->id,
+                  'billing' =>  $location->id,
+                  'intent' => null
                 ]
             )
           );
@@ -41,7 +43,8 @@ it('it can store an order was created event for an authenticated user', function
           cart: $cartItem->cart->uuid,
           shipping: $location->id,
           billing: $location->id,
-           userID: auth()->id()
+          userID: auth()->id(),
+          intent:null
       )
     );
 })->with('cartItemWithQuantityOf3', 'location', 'user');

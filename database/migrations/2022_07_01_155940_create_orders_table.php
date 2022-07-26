@@ -17,6 +17,10 @@ return new class () extends Migration {
             $table->string(column:'status');
             $table->string(column: 'coupon')->nullable();
 
+            $table->string(column:'intent_id')
+                ->comment('Intent Id Is The Payment Intent From Stripe.')
+                ->nullable()->unique();
+
             $table->unsignedBigInteger(column: 'total')->default(0);
             $table->unsignedBigInteger(column: 'reduction')->default(0);
 

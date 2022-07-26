@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Domains\Fulfillment\Jobs\Order;
+namespace Domains\Fulfillment\Jobs;
 
 use Domains\Fulfillment\Aggregates\OrderAggregate;
 use Domains\Fulfillment\ValueObjects\OrderValueObject;

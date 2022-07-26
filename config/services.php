@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'stripe' => [
+        'endpoint_secret' => env(key: 'STRIPE_ENDPOINT_SECRET'),
+        'key' => env(key: 'STRIPE_API_KEY')
+    ]
+
 ];

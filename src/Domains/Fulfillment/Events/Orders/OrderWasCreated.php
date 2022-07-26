@@ -15,13 +15,15 @@ class OrderWasCreated extends ShouldBeStored
      * @param  public int $shipping
      * @param  public int $billing
      * @param  public null|int $userID
+     * @param  public null|string $intent
      *
      */
     public function __construct(
         public string $cart,
         public int $shipping,
         public int $billing,
-        public null|int $userID
+        public null|int $userID,
+        public null|string $intent
     ) {
     }
 }

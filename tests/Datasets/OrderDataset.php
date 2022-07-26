@@ -14,7 +14,8 @@ dataset(
       cart:( CartItem::factory()->create())->cart->uuid,
       shipping: ($location = Location::factory()->create())->id,
       billing: $location->id,
-      userID:null
+      userID:null,
+      intent:''
     )
   ]
 );

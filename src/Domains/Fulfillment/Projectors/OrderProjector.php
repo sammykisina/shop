@@ -24,6 +24,7 @@ class OrderProjector extends Projector
             cart: $event->cart,
             shipping: $event->shipping,
             billing: $event->billing,
+            intent: $event->intent
         );
     }
 }

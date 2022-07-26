@@ -22,7 +22,7 @@ class CreateOrder
      * @return void
      *
      */
-    public static function handle(string $cart, int $shipping, int $billing): void
+    public static function handle(string $cart, int $shipping, int $billing,string $intent): void
     {
       if(auth()->check()){
         $cart = Cart::query()
@@ -33,6 +33,7 @@ class CreateOrder
           'number' => OrderNumberGenerator::generate(),
           'status' => OrderStatus::pending()->label,
           'coupon' => $cart->coupon,
+          'intent' => $intent,
           'total' => 'value',
           'reduction' => $cart->reduction,
           'user_id' => auth()->id(),
