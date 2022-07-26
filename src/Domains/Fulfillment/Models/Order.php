@@ -21,6 +21,7 @@ class Order extends Model
     'number',
     'status',
     'coupon',
+    'intent_id',
     'total',
     'reduction',
     'user_id',

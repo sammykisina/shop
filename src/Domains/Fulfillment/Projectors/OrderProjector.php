@@ -20,7 +20,6 @@ class OrderProjector extends Projector
      */
     public function onOrderWasCreated(OrderWasCreated $event): void
     {
-
         CreateOrder::handle(
             cart: $event->cart,
             shipping: $event->shipping,

@@ -22,6 +22,7 @@ class OrderFactory
             cart: $attributes['cart'],
             shipping: $attributes['shipping'],
             billing: $attributes['billing'],
+            intent: $attributes['intent']
         );
     }
 }

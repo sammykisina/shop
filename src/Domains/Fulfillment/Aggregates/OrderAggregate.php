@@ -17,7 +17,7 @@ class OrderAggregate extends AggregateRoot
             cart: $order->cart,
             shipping: $order->shipping,
             billing: $order->billing,
-            userID: auth()->id()
+            userID: auth()->id(),
           )
         );
 

@@ -18,6 +18,7 @@ class OrderValueObject
         public string $cart,
         public int $shipping,
         public int $billing,
+        public null|string $intent
     ) {
     }
 }
