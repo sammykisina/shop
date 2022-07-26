@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\Projectors;
+namespace Domains\Fulfillment\Projectors;
 
-use Domains\Customer\Actions\Order\CreateOrder;
-use Domains\Customer\Events\Orders\OrderWasCreated;
+use Domains\Fulfillment\Actions\Order\CreateOrder;
+use Domains\Fulfillment\Events\Orders\OrderWasCreated;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
 class OrderProjector extends Projector
@@ -20,11 +20,11 @@ class OrderProjector extends Projector
      */
     public function onOrderWasCreated(OrderWasCreated $event): void
     {
+
         CreateOrder::handle(
             cart: $event->cart,
             shipping: $event->shipping,
             billing: $event->billing,
-            userID: $event->userID,
         );
     }
 }

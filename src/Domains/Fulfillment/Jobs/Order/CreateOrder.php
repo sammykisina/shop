@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\Jobs\Order;
+namespace Domains\Fulfillment\Jobs\Order;
 
-use Domains\Customer\Aggregates\OrderAggregate;
-use Domains\Customer\ValueObjects\OrderValueObject;
+use Domains\Fulfillment\Aggregates\OrderAggregate;
+use Domains\Fulfillment\ValueObjects\OrderValueObject;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -22,8 +22,7 @@ class CreateOrder implements ShouldQueue
 
     public function __construct(
         public OrderValueObject $order,
-    ) {
-    }
+    ) {}
 
     public function handle(): void
     {

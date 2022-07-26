@@ -3,7 +3,7 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\States\Statuses;
+namespace Domains\Fulfillment\States\Statuses;
 
 use Spatie\Enum\Laravel\Enum;
 
@@ -15,6 +15,4 @@ use Spatie\Enum\Laravel\Enum;
  * @method static self cancelled()
  */
 
-final class OrderStatus extends Enum
-{
-}
+final class OrderStatus extends Enum {}

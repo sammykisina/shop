@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\Models;
+namespace Domains\Fulfillment\Models;
 
 use Database\Factories\OrderFactory;
 use Domains\Shared\Models\Concerns\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -57,6 +58,15 @@ class Order extends Model
             foreignKey: 'billing_id'
         );
     }
+
+    public function orderItems(): HasMany 
+    {
+        return $this->hasMany(
+            related: OrderLine::class,
+            foreignKey: 'order_id'
+        );
+    }
+
 
     protected static function newFactory(): OrderFactory
     {

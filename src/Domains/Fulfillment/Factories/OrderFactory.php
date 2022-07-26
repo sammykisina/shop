@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\Factories;
+namespace Domains\Fulfillment\Factories;
 
-use Domains\Customer\ValueObjects\OrderValueObject;
+use Domains\Fulfillment\ValueObjects\OrderValueObject;
 
 class OrderFactory
 {
@@ -22,8 +22,6 @@ class OrderFactory
             cart: $attributes['cart'],
             shipping: $attributes['shipping'],
             billing: $attributes['billing'],
-            userID: $attributes['userID'],
-            email: $attributes['email'],
         );
     }
 }

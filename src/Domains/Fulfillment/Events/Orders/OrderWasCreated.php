@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\Events\Orders;
+namespace Domains\Fulfillment\Events\Orders;
 
 use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
 
@@ -15,15 +15,13 @@ class OrderWasCreated extends ShouldBeStored
      * @param  public int $shipping
      * @param  public int $billing
      * @param  public null|int $userID
-     * @param  public null|string $email
      *
      */
     public function __construct(
         public string $cart,
         public int $shipping,
         public int $billing,
-        public null|int $userID,
-        public null|string $email,
+        public null|int $userID
     ) {
     }
 }

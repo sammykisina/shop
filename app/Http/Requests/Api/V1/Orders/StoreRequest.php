@@ -22,10 +22,7 @@ class StoreRequest extends FormRequest
                 'string',
                 'exists:carts,uuid'
             ],
-            'email' => [
-                Rule::requiredIf(auth()->guest()),
-                'email:rfc,dns',
-            ],
+            
             'shipping' => [
                 'required',
                 'int',
