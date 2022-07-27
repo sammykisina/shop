@@ -9,6 +9,14 @@ use Stripe\Event;
 
 class PaymentIntentFactory
 {
+  /**
+   * [Description for make]
+   *
+   * @param Event $event
+   * 
+   * @return PaymentIntentValueObject
+   * 
+   */
   public static function make(Event $event): PaymentIntentValueObject {
     return new PaymentIntentValueObject(
       id: $event->data->object->id,

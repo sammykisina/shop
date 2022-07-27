@@ -76,6 +76,13 @@ class User extends Authenticatable
         );
     }
 
+    public function wishlists():  HasMany {
+        return $this->hasMany(
+            related: Wishlist::class,
+            foreignKey:'user_id'
+        );
+    }
+
     protected static function newFactory(): UserFactory
     {
         return new UserFactory();

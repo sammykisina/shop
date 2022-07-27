@@ -19,3 +19,14 @@ dataset(
     )
   ]
 );
+
+dataset(
+  name: 'orderStatuses',
+  dataset: [
+    'succeeded',
+    'failed',
+    'refunded',
+    'processing'
+  ]
+);
+

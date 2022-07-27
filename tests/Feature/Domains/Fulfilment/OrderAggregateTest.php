@@ -15,7 +15,7 @@ use function Pest\Laravel\post;
  * These Tests Check If A Certain Endpoint Is Hit , Will The Correct Event Emitted And Stored
  */
 
-it('can not create an order from  a cart for an unauthenticated user', function (CartItem $cartItem, Location $location) {
+it('can not create an order from a cart for an unauthenticated user', function (CartItem $cartItem, Location $location) {
     expect(value: EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
 
     post(
@@ -53,3 +53,4 @@ it('can create an order from  a cart for an authenticated user', function (CartI
     expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 1);
     expect(EloquentStoredEvent::query()->first()->event_class)->toEqual(expected: OrderWasCreated::class);
 })->with('cartItemWithQuantityOf3', 'location', 'user');
+

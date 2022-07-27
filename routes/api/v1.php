@@ -78,11 +78,35 @@ Route::prefix('orders')->as('orders:')->group(function () {
     Route::post('/', App\Http\Controllers\Api\V1\Orders\StoreController::class)->name('store');
 });
 
+
+/**
+ * Wishlists routes
+ */
+Route::prefix('wishlists')->as('wishlists:')->group(function () {
+    /**
+     * Get all current user wishlists
+     */
+    Route::get('/',App\Http\Controllers\Api\V1\Wishlists\IndexController::class)->name('index');
+
+    /**
+     * Create a wishlist
+     */
+    Route::post('/', App\Http\Controllers\Api\V1\Wishlists\StoreController::class)->name('store');
+
+    /**
+     * Show a wishlist
+     */
+    Route::get('{wishlist:uuid}',App\Http\Controllers\Api\V1\Wishlists\ShowController::class)->name('show');
+
+});
+
 /**
  * Stripe Webhooks
  */
 Route::middleware(['stripe-webhooks'])->group(function () {
     Route::post('stripe/webhooks',App\Http\Controllers\Api\V1\Orders\StripeWebhookController::class)->name('stripe:webhooks'); 
 });
+
+
 
   

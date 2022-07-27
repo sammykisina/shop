@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Domains\Fulfillment\Actions\Order;
+namespace Domains\Fulfillment\Actions;
 
 use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\CartItem;
